@@ -62,7 +62,7 @@ def update_presence(username):
 try:
     while True:
         update_presence(username)
-        time.sleep(15)
+        time.sleep(7.5)
 except KeyboardInterrupt:
     RPC.close()
     print("ndcord is terminated.")
