@@ -1,8 +1,8 @@
-# ndcord
-Simple Discord Rich Presence for Navidrome
+# improved/fixed ndcord
+Still Simple Discord Rich Presence for Navidrome with Album Cover support
 
 ## How it works?
-This python script takes Json data from Navidrome Rest API and then sends it to a Discord developer app via [pypresence](https://github.com/qwertyquerty/pypresence "pypresence").
+This python script takes Json data from Navidrome Rest API then uses said Json data to get a picture from your server and then sends it to a Discord developer app via [pypresence](https://github.com/qwertyquerty/pypresence "pypresence"). (BOTH OF THESE WORK WITH ENCODED URLS !!! YOUR PASSWORD AND USERNAME IS IN SAID URL !!! (it seems unsafe so i'm pointing that out, i'm not fixing it either because i'm too lazy :P))
 
 ## How to start?
 ### Get Discord client_id
@@ -53,6 +53,7 @@ Fill in according to the data you have and this is mandatory!
     "server": "https://your.ndhost.here/",
     "username": "john",
     "password": "john123"
+    "label_name": "Listen Now!"
 }
 ```
 
@@ -65,3 +66,5 @@ python ndcord.py
 ![image](https://github.com/tarokeitaro/ndcord/assets/42670754/a432c43e-2af2-4c0f-be53-cc1390321325)
 
 To stop this program, click `ctrl + C`
+
+No AI was involved in fixing and improving of this project
