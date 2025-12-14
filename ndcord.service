@@ -1,0 +1,12 @@
+[Unit]
+Description=improved-ndcord autostart service
+
+[Service]
+ExecStart=/usr/sbin/python3 /home/[MODIFY]/improved-ndcord/ndcord.py
+WorkingDirectory=/home/[MODIFY]//improved-ndcord
+User=[MODIFY]
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
