@@ -1,5 +1,5 @@
 import requests
-from pypresence import Presence
+from pypresence import Presence,ActivityType
 import time, json
 
 with open('secret.json') as f:
@@ -9,6 +9,7 @@ client_id = secret_data.get('client_id', "")
 server = secret_data.get('server', "")
 username = secret_data.get('username', "")
 password = secret_data.get('password', "")
+label_name = secret_data.get('label_name', "")
 
 RPC = Presence(client_id)
 RPC.connect()
@@ -33,6 +34,8 @@ def get_now_playing_data(username, password):
 
     return None
 
+
+
 def update_presence(username):
     now_playing_data = get_now_playing_data(username, password)
 
@@ -41,16 +44,16 @@ def update_presence(username):
         artist = now_playing_data.get("artist", "")
         album = now_playing_data.get("album", "")
         year = now_playing_data.get("year", "")
-
+        album_id = now_playing_data.get("albumId", "")
         RPC.update(
-            activity_type=2,
+            activity_type=ActivityType.LISTENING,
             state=f"By: {artist}",
             details=title,
-            large_image='navidrome',
+            large_image= f"{server}rest/getCoverArt.view?u={username}&p={password}&v=1.16.0&c=ndcord&id={album_id}",
             large_text=f"{album} - {year}",
             # Remove this if you don't want to include the button
             buttons=[{
-                "label": "Listen Now!",
+                "label": label_name,
                 "url": f"{server}"
             }],
             ### End of the button
@@ -62,5 +65,4 @@ try:
         time.sleep(15)
 except KeyboardInterrupt:
     RPC.close()
-    print("")
     print("ndcord is terminated.")
