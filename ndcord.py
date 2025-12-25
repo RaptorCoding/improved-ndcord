@@ -14,6 +14,16 @@ label_name = secret_data.get('label_name', "")
 RPC = Presence(client_id)
 RPC.connect()
 
+success = False
+while not success:
+    try:
+        RPC.connect()
+        success = True
+    except Exception as e:
+        print(f'Discord Client not started or Exception caught !. Hanging for 30 seconds before attempting restart. Reason: {e}')
+        time.sleep(30)
+
+
 def get_now_playing_data(username, password):
     try:
         url = f"{server}rest/getNowPlaying.view?u={username}&p={password}&v=1.13.0&c=ndcord&f=json"
@@ -65,4 +75,4 @@ try:
         time.sleep(7.5)
 except KeyboardInterrupt:
     RPC.close()
-    print("ndcord is terminated.")
+    print("ndcord is terminated.") ##TODO: #1
