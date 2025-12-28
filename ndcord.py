@@ -69,8 +69,6 @@ def update_presence(username):
             }],
             ### End of the button
         )
-            ### End of the button
-        )
 while True:
     try:
         update_presence(username)
