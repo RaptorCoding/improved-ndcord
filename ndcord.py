@@ -13,15 +13,17 @@ label_name = secret_data.get('label_name', "")
 
 RPC = Presence(client_id)
 RPC.connect()
-
+success = True
 while True:
     try:
         RPC.connect()
         break
     except Exception as e:
         print(f'Discord Client not started or Exception caught during RPC Connection. Hanging for 30 seconds before attempting restart. Reason: {e}')
+        success = True
         time.sleep(30)
-
+if success == False:
+    print("Connection succeeded")
 
 def get_now_playing_data(username, password):
     try:
@@ -67,11 +69,24 @@ def update_presence(username):
             }],
             ### End of the button
         )
-
-try:
-    while True:
+            ### End of the button
+        )
+while True:
+    try:
         update_presence(username)
         time.sleep(7.5)
-except KeyboardInterrupt:
-    RPC.close()
-    print("ndcord terminated.") ##TODO: #1
+    except Exception as e:
+        print(f"Exception Caught. Retrying in 30 seconds. Reason: {e}")
+        time.sleep(30)
+        try:
+            RPC.connect()
+            print("Connection Succeeded")
+        except Exception as e:
+            print(f'Discord Client not started or Exception caught !. Hanging for 30 seconds before attempting restart. Reason: {e}')
+            time.sleep(30)
+
+    except KeyboardInterrupt:
+        RPC.close()
+        print("ndcord terminated.")
+        break
+
