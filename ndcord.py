@@ -12,7 +12,6 @@ password = secret_data.get('password', "")
 label_name = secret_data.get('label_name', "")
 
 RPC = Presence(client_id)
-RPC.connect()
 success = True
 while True:
     try:
