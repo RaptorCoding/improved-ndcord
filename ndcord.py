@@ -16,6 +16,7 @@ success = True
 while True:
     try:
         RPC.connect()
+        success = False
         break
     except Exception as e:
         print(f'Discord Client not started or Exception caught during RPC Connection. Hanging for 30 seconds before attempting restart. Reason: {e}')
